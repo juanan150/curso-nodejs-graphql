@@ -1,0 +1,22 @@
+# El signo de admiración en el typeDef es para evitar los nulls en las definiciones
+type Query {
+  hello: String!
+  getPerson(name: String, age: Int): String
+  getInt: Int
+  getFloat: Float
+  getString: String
+  getBoolean: Boolean
+  getID: ID
+  getNumbers(numbers: [Int]): [Int!]!
+  product(id: ID): Product!
+  products: [Product!]!
+}
+
+type Product {
+  id: ID!
+  name: String!
+  price: Float!
+  description: String!
+  image: String!
+  createdAt: String!
+}
