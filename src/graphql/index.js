@@ -5,11 +5,21 @@ const {
 const { loadFiles } = require('@graphql-tools/load-files')
 const resolvers = require('./resolvers')
 const { buildContext } = require('graphql-passport')
+const { typeDefs: scalarTypeDefs, resolvers: scalarResolvers } = require('graphql-scalars')
 
 const useGraphql = async (app) => {
-  const server = new ApolloServer({
-    typeDefs: await loadFiles('src/**/*.graphql'),
+  const typeDefs = [
+    ...await loadFiles('src/**/*.graphql'),
+    scalarTypeDefs
+  ]
+
+  const allResolvers = [
     resolvers,
+    scalarResolvers,
+  ]
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers: allResolvers,
     context: ({req, res}) => buildContext({req, res}),
     plugins: [ApolloServerPluginLandingPageLocalDefault],
   });
