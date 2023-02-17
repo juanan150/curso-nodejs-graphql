@@ -36,6 +36,7 @@ type Category {
   id: ID!
   name: String!
   image: String!
+  products: [Product]!
 }
 
 type AuthResponse {

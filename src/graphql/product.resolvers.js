@@ -16,12 +16,17 @@ const addProduct = (_, { dto }) => {
 };
 
 const updateProduct = (_, { id, dto }) => {
-  return service.update(id, dto)
+  return service.update(id, dto);
 };
 
 const deleteProduct = async (_, { id }) => {
-  await service.delete(id)
-  return id
+  await service.delete(id);
+  return id;
+};
+
+const getProductsByCategory = (parent) => {
+  const { id } = parent.dataValues;
+  return service.getByCategory(id);
 };
 
 module.exports = {
@@ -30,4 +35,5 @@ module.exports = {
   addProduct,
   updateProduct,
   deleteProduct,
+  getProductsByCategory,
 };
